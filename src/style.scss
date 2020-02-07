@@ -1,0 +1,172 @@
+$lightBlue: rgb(195, 217, 241);
+$textColour: rgb(216, 229, 238);
+$darkBlue: rgb(72, 151, 204);
+$offwhite: #f9f9f9;
+$hoverBlue: #0e73e7;
+$shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+$highlight: 1px solid grey;
+
+* {
+  margin: 0;
+}
+
+body {
+  background: $offwhite;
+}
+
+a {
+  text-decoration: none;
+}
+
+.button {
+  display: inline;
+  background-color: $darkBlue;
+  color: $textColour;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  text-align: left;
+}
+
+.applied {
+  background-color: green;
+}
+
+.button:hover {
+  background: $hoverBlue;
+}
+
+.searchBar {
+  background: $lightBlue;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    .button {
+      display: flex;
+      justify-content: space-between;
+      span {
+        margin-right: auto;
+      }
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: $offwhite;
+      min-width: 160px;
+      box-shadow: $shadow;
+      z-index: 1;
+      li {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        cursor: pointer;
+      }
+      /* Change color of dropdown links on hover */
+      li:hover {
+        background-color: #f1f1f1
+      }
+    }
+  }
+  /* Show the dropdown menu on hover */
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+  input {
+    margin: 0 20px;
+  }
+  .salaryInput {
+    width: 100px;
+    margin: 10px 5px 0px 0px;
+    outline: none;
+  }
+  .dropdownInput {
+    width: 120px;
+    margin: 5px 16px;
+    outline: none;
+  }
+  .loginForm {
+    position: relative;
+    display: inline-block;
+    .loginFormContent {
+      display: none;
+      position: absolute;
+      background-color: $offwhite;
+      min-width: 160px;
+      box-shadow: $shadow;
+      z-index: 1;
+      form {
+        padding-top: 5px;
+      }
+    }
+  }
+  .loginForm:hover .loginFormContent {
+    display: block;
+  }
+  .registerForm {
+    position: relative;
+    display: inline-block;
+    .registerFormContent {
+      display: none;
+      position: absolute;
+      background-color: $offwhite;
+      min-width: 160px;
+      box-shadow: $shadow;
+      z-index: 1;
+      form {
+        padding-top: 5px;
+      }
+    }
+  }
+  .registerForm:hover .registerFormContent {
+    display: block;
+  }
+}
+
+.listings {
+  display: flex;
+  flex-direction: column;
+  margin: 25px auto;
+  max-width: 800px;
+  .listing {
+    height: 100%;
+    margin: 0;
+    background: $textColour;
+    h2 {
+      margin: 10px;
+    }
+    p {
+      margin: 5px;
+    }
+    .details {
+      transition: all 1s ease;
+      overflow: hidden;
+      max-height: 0;
+    }
+    .detailsOpen {
+      max-height: 500px;
+      display: block
+    }
+  }
+  
+  .listing:hover {
+      box-shadow: $shadow;
+      border: $highlight
+  }
+  div:nth-of-type(even) {
+      background: $lightBlue;
+  }
+}
+
+
+
+
+
+
+
+
