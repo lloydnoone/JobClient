@@ -38,9 +38,8 @@ class Listing extends React.Component {
           <h3>Description: </h3>
           <p>{this.HTMLtoText(job.description)}</p>
           {!this.props.applied && localAuth.isAuthenticated() &&
-          <a href={job.url}>
-            <button onClick={(e) => this.props.saveId(e, job.id)} className='button'>Apply</button>
-          </a>}
+            <button onClick={(e) => this.props.saveId(e, job.id, job.url)} className='button'>Apply</button>
+          }
           {!this.props.applied && !localAuth.isAuthenticated() &&
             <button className='button'>Sign in to apply!</button>
           }
