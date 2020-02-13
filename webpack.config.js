@@ -24,7 +24,7 @@ module.exports = {
     watchContentBase: true,
     historyApiFallback: true,
     proxy: {
-      '/api': {
+      '/api/**': {
         target: 'http://localhost:8888',
         secure: false,
         changeOrigin: true
