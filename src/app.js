@@ -31,7 +31,7 @@ class App extends Component {
 
   componentDidMount() {
     //load default job search
-    axios.get('/api/jobs/javascript/london')
+    axios.get('api/jobs/javascript/london')
       .then(res => this.setState({ jobs: res.data }))
       .catch(err => console.log(err))
     
@@ -57,7 +57,7 @@ class App extends Component {
     console.log('clear users jobs just ran.')
   }
 
-  saveId(e, jobId) {
+  saveId(e, jobId, jobUrl) {
     e.preventDefault()
     axios.post('/api/users/jobs', { jobBoardId: jobId }, { //attaches job to currently logged in user
       headers: { Authorization: `Bearer ${localAuth.getToken()}` }
@@ -67,7 +67,7 @@ class App extends Component {
         const jobIdsArr = res.data.jobs.map(job => {
           return job.jobBoardId
         })
-        this.setState({ jobIds: jobIdsArr })
+        this.setState({ jobIds: jobIdsArr }, () => location.href = jobUrl)
       })
       .catch(err => console.log('error: ', err))
   }

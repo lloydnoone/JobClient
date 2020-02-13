@@ -27,7 +27,7 @@ class Listings extends React.Component {
               key={job.id} 
               job={job} 
               applied={this.props.jobIds.includes(job.id)}
-              saveId={this.saveId}
+              saveId={this.props.saveId}
             />
           })
         }

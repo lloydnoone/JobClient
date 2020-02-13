@@ -24,7 +24,7 @@ module.exports = {
     watchContentBase: true,
     historyApiFallback: true,
     proxy: {
-      '/api/**': {
+      '/api': {
         target: 'http://localhost:8888',
         secure: false,
         changeOrigin: true
@@ -38,5 +38,11 @@ module.exports = {
       filename: 'index.html',
       inject: 'body'
     })
-  ]
+  ],
+  externals: {
+    // global app config object
+    config: JSON.stringify({
+      apiUrl: 'http://localhost:8000'
+    })
+  }
 }
