@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import axios from 'axios'
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
 
 import localAuth from '../lib/localAuth'
+import reducers from '../reducers'
 
 import SearchBar from '../components/SearchBar'
 import Listings from '../components/Listings'
@@ -106,7 +109,14 @@ class App extends Component {
   }
 }
 
+const store = createStore(
+  reducers,
+  {}
+)
+
 ReactDOM.render(
-  <App />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('root')
 )

@@ -1,7 +1,9 @@
 import React from 'react'
 import axios from 'axios'
+import { connect } from 'react-redux'
 
 import localAuth from '../lib/localAuth'
+import * as actions from '../actions'
 
 import Dropdown from './Dropdown'
 
@@ -24,6 +26,7 @@ class SearchBar extends React.Component {
   }
 
   handleFormChange(e) {
+    this.props.handleFormChange(e)
     this.setState({ [e.target.dataset.name]: (e.target.value || e.target.innerHTML) })
   }
 
@@ -57,7 +60,6 @@ class SearchBar extends React.Component {
   }
 
   render() {
-    console.log('search bar state: ', this.state)
     return (
       <div className='searchBar'>
         <div className='login'>
@@ -102,4 +104,16 @@ class SearchBar extends React.Component {
   }
 }
 
-export default SearchBar
+function mapStateToProps(state) {
+  console.log('state from redux: ', state)
+  const { username, email, password, passwordConfirmation, userId } = state.forms
+  return { 
+    username: username,
+    email: email,
+    password: password,
+    passwordConfirmation: passwordConfirmation,
+    userId: userId
+  }
+}
+
+export default connect(mapStateToProps, actions)(SearchBar)
