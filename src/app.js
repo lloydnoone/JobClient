@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 import axios from 'axios'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { connect } from 'react-redux'
 
 import localAuth from '../lib/localAuth'
-import reducers from '../reducers'
+import * as actions from '../actions'
 
 import SearchBar from '../components/SearchBar'
 import Listings from '../components/Listings'
@@ -52,12 +50,10 @@ class App extends Component {
         })
         .catch(err => console.log('error: ', err))
     }
-    console.log('load users jobs just ran.')
   }
 
   clearUsersJobs() {
     this.setState({ jobIds: [] })
-    console.log('clear users jobs just ran.')
   }
 
   saveId(e, jobId, jobUrl) {
@@ -87,7 +83,7 @@ class App extends Component {
 
   render() {
     if (!this.state.jobs) return null
-    console.log(this.state)
+    console.log('state in app from redux: ', this.props)
     return (
       <div className='App'>
         <SearchBar 
@@ -109,14 +105,8 @@ class App extends Component {
   }
 }
 
-const store = createStore(
-  reducers,
-  {}
-)
+function mapStateToProps(state) {
+  return { jobSearch: state.jobSearch }
+}
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
+export default connect(mapStateToProps, actions)(App)

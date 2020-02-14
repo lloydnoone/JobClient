@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 import { connect } from 'react-redux'
 
 import localAuth from '../lib/localAuth'
@@ -10,15 +9,6 @@ import Dropdown from './Dropdown'
 class SearchBar extends React.Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      username: '',
-      email: '',
-      password: '',
-      passwordConfirmation: '',
-      userId: ''
-    }
-
     this.handleLogOut = this.handleLogOut.bind(this)
     this.handleSubmitLogin = this.handleSubmitLogin.bind(this)
     this.handleFormChange = this.handleFormChange.bind(this)
@@ -27,36 +17,35 @@ class SearchBar extends React.Component {
 
   handleFormChange(e) {
     this.props.handleFormChange(e)
-    this.setState({ [e.target.dataset.name]: (e.target.value || e.target.innerHTML) })
   }
 
   handleSubmitLogin(e) {
+    const { email, password, signIn, loadUsersJobs } = this.props
     e.preventDefault()
-    axios.post('/api/login', this.state)
-      .then(res => {
-        localAuth.setToken(res.data.token)
-        this.props.loadUsersJobs()
-        this.setState({ email: '', password: '', userId: res.data.userId })
-        console.log('data from response. ', res.data)
-      })
-      .catch(err => console.log(err.message))
+    signIn({ email, password }, () => {
+      loadUsersJobs()
+    })
   }
 
   handleLogOut(e) {
+    const { signOut, clearUsersJobs } = this.props
     e.preventDefault()
-    localAuth.logout()
-    this.props.clearUsersJobs()
-    this.setState({ userId: '' })
+    signOut(() => {
+      clearUsersJobs()  
+    })
   }
 
   handleSubmitRegister(e) {
+    const {
+      username,
+      email,
+      password,
+      passwordConfirmation,
+      register
+    } = this.props
+
     e.preventDefault()
-    axios.post('/api/register', this.state)
-      .then((res) => {
-        localAuth.setToken(res.data.token)
-        this.setState({ email: '', password: '', userId: res.data.userId, passwordConfirmation: '', username: '' })
-      })
-      .catch(err => console.log(err))
+    register({  username, email, password, passwordConfirmation })
   }
 
   render() {
@@ -106,7 +95,7 @@ class SearchBar extends React.Component {
 
 function mapStateToProps(state) {
   console.log('state from redux: ', state)
-  const { username, email, password, passwordConfirmation, userId } = state.forms
+  const { username, email, password, passwordConfirmation, userId } = state.auth
   return { 
     username: username,
     email: email,

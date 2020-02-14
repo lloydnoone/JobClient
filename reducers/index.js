@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux'
-import formsReducer from './forms'
+import authReducer from './auth'
+import jobSearchReducer from './jobSearch'
 
 export default combineReducers({
-  forms: formsReducer
+  auth: authReducer,
+  jobSearch: jobSearchReducer 
 })

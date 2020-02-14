@@ -1,3 +1,7 @@
 export const AUTH_USER = 'auth_user'
 export const AUTH_ERROR = 'auth_error'
 export const FORM_CHANGE = 'form_change'
+export const LOG_IN = 'log_in'
+export const LOG_OUT = 'log_out'
+export const REGISTER = 'register'
+export const DEFAULT_SEARCH = 'default_search'
