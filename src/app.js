@@ -42,13 +42,7 @@ class App extends Component {
     //if (!this.props.jobSearch.jobs || !this.props.jobSearch.jobIds) return null
     return (
       <div className='App'>
-        <SearchBar 
-          location={this.props.jobSearch.location}
-          handleChange={this.props.handleSearchChange}
-          submitSearch={this.props.submitSearch}
-          loadUsersJobs={this.props.loadUsersJobs}
-          clearUsersJobs={this.props.clearUsersJobs}
-        />
+        <SearchBar />
         <Listings 
           jobs={this.props.jobSearch.jobs}
           jobIds={[...this.props.jobSearch.jobIds]}

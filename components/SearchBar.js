@@ -82,10 +82,10 @@ class SearchBar extends React.Component {
           {localAuth.isAuthenticated() && <button className="button" onClick={this.handleLogOut}>Log Out</button>}
         </div>
         <div className='jobSearch'>
-          <Dropdown location={this.props.location} onClick={(e) => this.props.handleChange(e)} />
-          <input data-name="title" placeholder="Job Title..." onChange={this.props.handleChange} />
-          <input className='salaryInput' data-name="minSalary" placeholder='Minimum Salary' onChange={this.props.handleChange} type='number' min='10000' max='100000' />
-          <input className='salaryInput' data-name="maxSalary" placeholder='Maximum Salary' onChange={this.props.handleChange} type='number' min='10000' max='100000' />
+          <Dropdown location={this.props.jobSearch.location} onClick={(e) => this.props.handleSearchChange(e)} />
+          <input data-name="title" placeholder="Job Title..." onChange={this.props.handleSearchChange} />
+          <input className='salaryInput' data-name="minSalary" placeholder='Minimum Salary' onChange={this.props.handleSearchChange} type='number' min='10000' max='100000' />
+          <input className='salaryInput' data-name="maxSalary" placeholder='Maximum Salary' onChange={this.props.handleSearchChange} type='number' min='10000' max='100000' />
           <button className="button" onClick={() => this.props.submitSearch(this.props.jobSearch.title, this.props.jobSearch.location)}>Search</button>
         </div>
       </div>
@@ -95,13 +95,7 @@ class SearchBar extends React.Component {
 
 function mapStateToProps(state) {
   console.log('state from redux: ', state)
-  //const { username, email, password, passwordConfirmation, userId } = state.auth
   return { 
-    // username: username,
-    // email: email,
-    // password: password,
-    // passwordConfirmation: passwordConfirmation,
-    // userId: userId,
     auth: state.auth,
     jobSearch: state.jobSearch
   }
