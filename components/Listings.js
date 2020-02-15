@@ -1,4 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
+import * as actions from '../actions'
 
 import Listing from './Listing'
 
@@ -12,21 +15,21 @@ class Listings extends React.Component {
   }
 
   render() {
-    console.log('listings render. ')
+    const { minSalary, maxSalary } = this.props.jobSearch
     return (
       <div className="listings">
-        {this.props.jobs.jobsArray
+        {this.props.jobSearch.jobs.jobsArray
           .filter((job) => {
-            if (!this.props.minSalary && !this.props.maxSalary) return true
-            if (job.minSalary >= parseInt(this.props.minSalary) && !this.props.maxSalary) return true
-            if (job.maxSalary <= parseInt(this.props.maxSalary) && !this.props.minSalary) return true
-            return job.minSalary >= parseInt(this.props.minSalary) && job.maxSalary <= parseInt(this.props.maxSalary)
+            if (!minSalary && !maxSalary) return true
+            if (job.minSalary >= parseInt(minSalary) && !maxSalary) return true
+            if (job.maxSalary <= parseInt(maxSalary) && !minSalary) return true
+            return job.minSalary >= parseInt(minSalary) && job.maxSalary <= parseInt(maxSalary)
           })
           .map(job => {
             return <Listing 
               key={job.id} 
               job={job} 
-              applied={this.props.jobIds.includes(job.id)}
+              applied={this.props.jobSearch.jobIds.includes(job.id)}
               saveId={this.props.saveId}
             />
           })
@@ -36,4 +39,8 @@ class Listings extends React.Component {
   }
 }
 
-export default Listings
+function mapStateToProps(state) {
+  return { jobSearch: state.jobSearch }
+}
+
+export default connect(mapStateToProps, actions)(Listings)

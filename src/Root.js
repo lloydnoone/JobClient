@@ -17,8 +17,8 @@ const initialState = {
     },
     title: 'JavaScript',
     location: 'London',
-    minSalary: '10000',
-    maxSalary: '30000',
+    minSalary: '',
+    maxSalary: '',
     jobIds: []
   }
 }

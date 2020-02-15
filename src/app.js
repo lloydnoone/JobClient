@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { connect } from 'react-redux'
 
 import * as actions from '../actions'
@@ -10,31 +9,11 @@ import Listings from '../components/Listings'
 import './style.scss'
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      jobs: null,
-      jobIds: [],
-      title: 'Javascript',
-      location: 'London',
-      minSalary: null,
-      maxSalary: null,
-      savedJobs: []
-    }
-    this.submitSearch = this.submitSearch.bind(this)
-  }
 
   componentDidMount() {
     this.props.defaultJobSearch(() => {
       this.props.loadUsersJobs()
     })
-  }
-
-  submitSearch() {
-    axios.get(`/api/jobs/${this.state.title}/${this.state.location}`)
-      .then(res => this.setState({ jobs: res.data }))
-      .catch(err => console.log(err))
   }
 
   render() {
@@ -43,13 +22,7 @@ class App extends Component {
     return (
       <div className='App'>
         <SearchBar />
-        <Listings 
-          jobs={this.props.jobSearch.jobs}
-          jobIds={[...this.props.jobSearch.jobIds]}
-          saveId={this.props.saveId}
-          minSalary={this.state.minSalary}
-          maxSalary={this.state.maxSalary}
-        />
+        <Listings />
       </div>
     )
   }
