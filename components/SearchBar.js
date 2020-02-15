@@ -20,10 +20,10 @@ class SearchBar extends React.Component {
   }
 
   handleSubmitLogin(e) {
-    const { email, password, signIn, loadUsersJobs } = this.props
+    const { email, password } = this.props.auth
     e.preventDefault()
-    signIn({ email, password }, () => {
-      loadUsersJobs()
+    this.props.signIn({ email, password }, () => {
+      this.props.loadUsersJobs()
     })
   }
 
@@ -42,7 +42,7 @@ class SearchBar extends React.Component {
       password,
       passwordConfirmation,
       register
-    } = this.props
+    } = this.props.auth
 
     e.preventDefault()
     register({  username, email, password, passwordConfirmation })
@@ -86,7 +86,7 @@ class SearchBar extends React.Component {
           <input data-name="title" placeholder="Job Title..." onChange={this.props.handleChange} />
           <input className='salaryInput' data-name="minSalary" placeholder='Minimum Salary' onChange={this.props.handleChange} type='number' min='10000' max='100000' />
           <input className='salaryInput' data-name="maxSalary" placeholder='Maximum Salary' onChange={this.props.handleChange} type='number' min='10000' max='100000' />
-          <button className="button" onClick={this.props.submitSearch}>Search</button>
+          <button className="button" onClick={() => this.props.submitSearch(this.props.jobSearch.title, this.props.jobSearch.location)}>Search</button>
         </div>
       </div>
     )
@@ -95,13 +95,15 @@ class SearchBar extends React.Component {
 
 function mapStateToProps(state) {
   console.log('state from redux: ', state)
-  const { username, email, password, passwordConfirmation, userId } = state.auth
+  //const { username, email, password, passwordConfirmation, userId } = state.auth
   return { 
-    username: username,
-    email: email,
-    password: password,
-    passwordConfirmation: passwordConfirmation,
-    userId: userId
+    // username: username,
+    // email: email,
+    // password: password,
+    // passwordConfirmation: passwordConfirmation,
+    // userId: userId,
+    auth: state.auth,
+    jobSearch: state.jobSearch
   }
 }
 

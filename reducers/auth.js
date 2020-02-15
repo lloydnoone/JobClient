@@ -18,7 +18,6 @@ export default function(state = {}, action) {
         username: ''
       }
     case FORM_CHANGE:
-      console.log('log in forms reducer: ', state)
       return { ...state, [action.payload.target.dataset.name]: (action.payload.target.value || action.payload.target.innerHTML) }
     default:
       return state

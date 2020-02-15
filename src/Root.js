@@ -7,7 +7,23 @@ import reducers from '../reducers'
 
 import App from './app'
 
-const Root = ({ children, initialState = {} }) => {
+const initialState = {
+  auth: {
+
+  },
+  jobSearch: {
+    jobs: {
+      jobsArray: []
+    },
+    title: 'JavaScript',
+    location: 'London',
+    minSalary: '10000',
+    maxSalary: '30000',
+    jobIds: []
+  }
+}
+
+const Root = ({ children }) => {
   const store = createStore(
     reducers, 
     initialState,
